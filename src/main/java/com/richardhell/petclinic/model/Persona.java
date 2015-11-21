@@ -1,17 +1,27 @@
 package com.richardhell.petclinic.model;
 import com.richardhell.petclinic.helper.TypesUtil;
 import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "gen_persona")
 public class Persona implements Serializable {
+    @Column(name = "sexo")
+    private Short sexo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona", fetch = FetchType.LAZY)
+    private Collection<Vendedor> vendedorCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona", fetch = FetchType.LAZY)
+    private Collection<Cliente> clienteCollection;
 
     @Id
     @GeneratedValue
@@ -36,8 +46,6 @@ public class Persona implements Serializable {
     @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "sexo")
-    private Integer sexo;
 
     @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY)
     private Propietario propietario;
@@ -110,13 +118,6 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    public Integer getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Integer sexo) {
-        this.sexo = sexo;
-    }
 
     public Propietario getPropietario() {
         return propietario;
@@ -144,6 +145,32 @@ public class Persona implements Serializable {
     
     public String getNombreCompleto(){
         return this.nombres + " "+ this.apellidos;
+    }
+
+    public Short getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Short sexo) {
+        this.sexo = sexo;
+    }
+
+    @XmlTransient
+    public Collection<Vendedor> getVendedorCollection() {
+        return vendedorCollection;
+    }
+
+    public void setVendedorCollection(Collection<Vendedor> vendedorCollection) {
+        this.vendedorCollection = vendedorCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
     }
    
     

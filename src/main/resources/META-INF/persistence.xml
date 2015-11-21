@@ -6,6 +6,8 @@
     <class>com.richardhell.petclinic.model.Vendedor</class>
     <class>com.richardhell.petclinic.model.Cliente</class>
     <class>com.richardhell.petclinic.model.Categoria</class>
+    <class>com.richardhell.petclinic.model.DetalleVenta</class>
+    <class>com.richardhell.petclinic.model.Venta</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/petclinic?zeroDateTimeBehavior=convertToNull"/>
